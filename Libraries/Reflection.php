@@ -1,5 +1,5 @@
 <?php
-namespace MyMVC {
+namespace YourMVC {
 
     /**
      * Provide an interface to create a reflection framework.
@@ -30,7 +30,7 @@ namespace MyMVC {
      * Allows for a simplified use of Reflection in the MyMVC framework.
      * @author stephen
      */
-    class MyReflection implements \MyMVC\iRelfection {
+    class YourReflection implements \YourMVC\iRelfection {
         // Inquery methods
         /**
          * Determine if an object has a method.

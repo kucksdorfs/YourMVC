@@ -1,7 +1,7 @@
 <?php
 
-namespace MyMVC {
-	use MyMVC\Reflection as Reflection;
+namespace YourMVC {
+	use YourMVC\Reflection as Reflection;
 
 	interface iBaseModel {
 		public function Insert();

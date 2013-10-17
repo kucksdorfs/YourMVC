@@ -1,5 +1,5 @@
 <?php
-namespace MyMVC\UnitTest\Framework;
+namespace YourMVC\UnitTest\Framework;
 {
 
     class UnitTest {
@@ -53,7 +53,7 @@ namespace MyMVC\UnitTest\Framework;
             throw new \Exception($failMessage);
         }
 
-        protected function AssertAreEqualNotIdentical($value1,$value2,$failMessage = "The two values either are not equals or are identical."){
+        protected final function AssertAreEqualNotIdentical($value1,$value2,$failMessage = "The two values either are not equals or are identical."){
             if($value1 == $value2 && $value1 !== $value2)
                 return;
             throw new \Exception($failMessage);
@@ -129,7 +129,7 @@ namespace MyMVC\UnitTest\Framework;
             $testClasses = array();
             // is_subclass_of
             for($i = 0;$i < count($classesAfterInclude);$i++){
-                if(!in_array($classesAfterInclude[$i],$classesBeforeInclude) && is_subclass_of($classesAfterInclude[$i],"\MyMVC\UnitTest\Framework\UnitTest")){
+                if(!in_array($classesAfterInclude[$i],$classesBeforeInclude) && is_subclass_of($classesAfterInclude[$i],"\YourMVC\UnitTest\Framework\UnitTest")){
                     array_push($testClasses,$classesAfterInclude[$i]);
                 }
             }
@@ -188,4 +188,4 @@ namespace MyMVC\UnitTest\Framework;
 }
 $unitTestPath = getcwd() . DIRECTORY_SEPARATOR . "UnitTests";
 $args = array("unitTestPath"=>$unitTestPath,"TestsEndWith"=>"Test");
-\MyMVC\UnitTest\Framework\UnitTest::Main($args);
+\YourMVC\UnitTest\Framework\UnitTest::Main($args);

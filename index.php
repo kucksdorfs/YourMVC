@@ -1,6 +1,6 @@
 <?php
 include 'Models/Reflection.php';
-use MyMVC\Reflection;
+use YourMVC\Reflection;
 
 class HelloWorld {
 	public function sayHelloTo($name) {
@@ -22,9 +22,9 @@ else
 echo '<br/>';
 
 
-echo MyMVC\MyReflection::HasStaticMethod(new HelloWorld(), "StaticHelloWorld") == true ? "true" : "false";
+echo YourMVC\YourReflection::HasStaticMethod(new HelloWorld(), "StaticHelloWorld") == true ? "true" : "false";
 echo '</br>';
-echo MyMVC\MyReflection::HasInstanceMethod ( new HelloWorld (), "sayHelloTo" ) == true ? "true" : "false";
+echo YourMVC\YourReflection::HasInstanceMethod ( new HelloWorld (), "sayHelloTo" ) == true ? "true" : "false";
 echo '</br>';
-echo MyMVC\MyReflection::HasInstanceMethod ( new HelloWorld (), "reflectNotGoingToFindMe" ) == true ? "true" : "false";
+echo YourMVC\YourReflection::HasInstanceMethod ( new HelloWorld (), "reflectNotGoingToFindMe" ) == true ? "true" : "false";
 

@@ -1,103 +1,103 @@
 <?php
-namespace MyMVC\UnitTest\Framework {
-    use MyMVC\MyReflection;
-    use MyMVC;
-    require_once "UnitTest.php";
+namespace YourMVC\UnitTest\Framework {
+    use YourMVC\YourReflection;
+    use YourMVC;
+    require_once "Libraries/UnitTestFramework.php";
     require_once "Libraries/Reflection.php";
 
-    class ReflectionTest extends \MyMVC\UnitTest\Framework\UnitTest {
+    class ReflectionTest extends \YourMVC\UnitTest\Framework\UnitTest {
 
         //Creating Objects Tests
         function CreateObjectTest(){
-            $myClass = MyReflection::CreateNewInstance("MyMVC\UnitTest\Framework\MyTestClass");
+            $myClass = YourReflection::CreateNewInstance("YourMVC\UnitTest\Framework\MyTestClass");
             $this->AssertIsNotNull($myClass);
         }
 
         function CreateBadObjectTest(){
-            $myClass = MyReflection::CreateNewInstance("ReallyBadClass");
+            $myClass = YourReflection::CreateNewInstance("ReallyBadClass");
             $this->AssertIsNull($myClass);
         }
 
         //Instance Methods Tests
         function ObjectHasMethodTest(){
-            $myClass = MyReflection::CreateNewInstance("MyMVC\UnitTest\Framework\MyTestClass");
-            $this->AssertTrue(MyReflection::HasInstanceMethod($myClass,"CalculateSum"));
+            $myClass = YourReflection::CreateNewInstance("YourMVC\UnitTest\Framework\MyTestClass");
+            $this->AssertTrue(YourReflection::HasInstanceMethod($myClass,"CalculateSum"));
         }
 
         function CallInstanceMethodTest(){
-            $myClass = MyReflection::CreateNewInstance("MyMVC\UnitTest\Framework\MyTestClass");
+            $myClass = YourReflection::CreateNewInstance("YourMVC\UnitTest\Framework\MyTestClass");
             $myRetValue = null;
-            $completed = MyReflection::InvokeInstanceMethod($myClass,"CalculateSum",array(2,2),$myRetValue);
+            $completed = YourReflection::InvokeInstanceMethod($myClass,"CalculateSum",array(2,2),$myRetValue);
             $this->AssertTrue($completed);
             $this->AssertAreEqual(4,$myRetValue);
         }
 
-        function CallInstanceMethodWithNoParameters(){
-            $myClass = MyReflection::CreateNewInstance("MyMVC\UnitTest\Framework\MyTestClass");
+        function CallInstanceMethodWithNoParametersTest(){
+            $myClass = YourReflection::CreateNewInstance("YourMVC\UnitTest\Framework\MyTestClass");
             $myRetValue = null;
-            $completed = MyReflection::InvokeInstanceMethod($myClass,"CalculateTrue",null,$myRetValue);
+            $completed = YourReflection::InvokeInstanceMethod($myClass,"CalculateTrue",null,$myRetValue);
             $this->AssertTrue($completed);
-            $this->AssertIsNull($myRetValue);
+            $this->AssertTrue($myRetValue);
         }
 
         function CallInstanceMethodWithBadParametersTest(){
-            $myClass = MyReflection::CreateNewInstance("MyMVC\UnitTest\Framework\MyTestClass");
+            $myClass = YourReflection::CreateNewInstance("YourMVC\UnitTest\Framework\MyTestClass");
             $myRetValue = null;
-            $completed = MyReflection::InvokeInstanceMethod($myClass,"CalculateSum",null,$myRetValue);
+            $completed = YourReflection::InvokeInstanceMethod($myClass,"CalculateSum",null,$myRetValue);
             $this->AssertTrue($completed);
         }
 
         function CallVoidMethodTest(){
-            $myClass = MyReflection::CreateNewInstance("MyMVC\UnitTest\Framework\MyTestClass");
+            $myClass = YourReflection::CreateNewInstance("YourMVC\UnitTest\Framework\MyTestClass");
             $myRetValue = null;
-            $completed = MyReflection::InvokeInstanceMethod($myClass,"MyVoidFunction",array(2,2),$myRetValue);
+            $completed = YourReflection::InvokeInstanceMethod($myClass,"MyVoidFunction",array(2,2),$myRetValue);
             $this->AssertTrue($completed);
         }
 
         function CallBadMethodTest(){
-            $myClass = MyReflection::CreateNewInstance("MyMVC\UnitTest\Framework\MyTestClass");
+            $myClass = YourReflection::CreateNewInstance("YourMVC\UnitTest\Framework\MyTestClass");
             $myRetValue = null;
-            $completed = MyReflection::InvokeInstanceMethod($myClass,"CalculateSume",array(2,2),$myRetValue);
+            $completed = YourReflection::InvokeInstanceMethod($myClass,"CalculateSume",array(2,2),$myRetValue);
             $this->AssertFalse($completed);
         }
 
         //Static Methods Tests
         function CallStaticMethodTest(){
             $myRetValue = null;
-            $completed = MyReflection::InvokeStaticMethod("MyMVC\UnitTest\Framework\MyTestClass","CalculateProduct",array(3,3),$retValue);
+            $completed = YourReflection::InvokeStaticMethod("YourMVC\UnitTest\Framework\MyTestClass","CalculateProduct",array(3,3),$retValue);
             $this->AssertTrue($completed);
             $this->AssertAreEqual($retValue,9);
         }
 
         function CallStaticMethodWithNoParametersTest(){
             $myRetValue = null;
-            $completed = MyReflection::InvokeStaticMethod("MyMVC\UnitTest\Framework\MyTestClass","CalculateFalse",null,$myRetValue);
+            $completed = YourReflection::InvokeStaticMethod("YourMVC\UnitTest\Framework\MyTestClass","CalculateFalse",null,$myRetValue);
             $this->AssertTrue($completed);
             $this->AssertFalse($myRetValue);
         }
 
         //Instance Variables Tests
         function HasInstanceVariablesTest(){
-            $$this->AssertTrue(MyReflection::HasInstanceMember("MyMVC\UnitTest\Framework\MyTestClass","myString"));
-            $this->AssertTrue(MyReflection::HasInstanceMember("MyMVC\UnitTest\Framework\MyTestClass","myInt"));
-            $this->AssertTrue(MyReflection::HasInstanceMember("MyMVC\UnitTest\Framework\MyTestClass","myFloat"));
+            $this->AssertTrue(YourReflection::HasInstanceMember("YourMVC\UnitTest\Framework\MyTestClass","myString"));
+            $this->AssertTrue(YourReflection::HasInstanceMember("YourMVC\UnitTest\Framework\MyTestClass","myInt"));
+            $this->AssertTrue(YourReflection::HasInstanceMember("YourMVC\UnitTest\Framework\MyTestClass","myFloat"));
         }
 
         function GetInstanceVariablesTest(){
-            $instance = MyReflection::CreateNewInstance("MyMVC\UnitTest\Framework\MyTestClass");
-            $this->AssertAreEqual(MyReflection::GetInstanceMemberValue($instance,"myString"),"Hello World");
-            $this->AssertAreEqual(MyReflection::GetInstanceMemberValue($instance,"myInt"),1);
-            $this->AssertAreEqual(MyReflection::GetInstanceMemberValue($instance,"myFloat"),3.14);
+            $instance = YourReflection::CreateNewInstance("YourMVC\UnitTest\Framework\MyTestClass");
+            $this->AssertAreEqual(YourReflection::GetInstanceMemberValue($instance,"myString"),"Hello World");
+            $this->AssertAreEqual(YourReflection::GetInstanceMemberValue($instance,"myInt"),1);
+            $this->AssertAreEqual(YourReflection::GetInstanceMemberValue($instance,"myFloat"),3.14);
         }
 
         function DoesNotHaveInstanceVariablesTest(){
-            $this->AssertFalse(MyReflection::HasInstanceMember("MyMVC\UnitTest\Framework\MyTestClass","myBadVariable"));
+            $this->AssertFalse(YourReflection::HasInstanceMember("YourMVC\UnitTest\Framework\MyTestClass","myBadVariable"));
         }
 
         function GetDoesNotHaveInstanceVariablesTest(){
             $iShouldFail = false;
             try{
-                $this->AssertFalse(MyReflection::GetInstanceMemberValue("MyMVC\UnitTest\Framework\MyTestClass","myBadVariable"));
+                $this->AssertFalse(YourReflection::GetInstanceMemberValue("YourMVC\UnitTest\Framework\MyTestClass","myBadVariable"));
                 $iShouldFail = true;
             }
             catch(\Exception $ex){
@@ -110,25 +110,25 @@ namespace MyMVC\UnitTest\Framework {
 
         //Static Variables Tests
         function HasStaticVariableTest(){
-            $this->AssertTrue(MyReflection::HasStaticMember("MyMVC\UnitTest\Framework\MyTestClass","myStaticString"));
-            $this->AssertTrue(MyReflection::HasStaticMember("MyMVC\UnitTest\Framework\MyTestClass","myStaticInt"));
-            $this->AssertTrue(MyReflection::HasStaticMember("MyMVC\UnitTest\Framework\MyTestClass","myStaticFloat"));
+            $this->AssertTrue(YourReflection::HasStaticMember("YourMVC\UnitTest\Framework\MyTestClass","myStaticString"));
+            $this->AssertTrue(YourReflection::HasStaticMember("YourMVC\UnitTest\Framework\MyTestClass","myStaticInt"));
+            $this->AssertTrue(YourReflection::HasStaticMember("YourMVC\UnitTest\Framework\MyTestClass","myStaticFloat"));
         }
 
         function DoesNotHaveStaticVariableTest(){
-            $this->AssertFalse(MyReflection::HasStaticMember("MyMVC\UnitTest\Framework\MyTestClass","myBadStatic"));
+            $this->AssertFalse(YourReflection::HasStaticMember("YourMVC\UnitTest\Framework\MyTestClass","myBadStatic"));
         }
 
         function GetStaticVariableTest() {
-            $this->AssertAreEqual(MyReflection::GetStaticMemberValue("MyMVC\UnitTest\Framework\MyTestClass","myStaticString"),"Hello World from a Static member");
-            $this->AssertAreEqual(MyReflection::GetStaticMemberValue("MyMVC\UnitTest\Framework\MyTestClass","myStaticInt"),3);
-            $this->AssertAreEqual(MyReflection::GetStaticMemberValue("MyMVC\UnitTest\Framework\MyTestClass","myStaticFloat"),2.78);
+            $this->AssertAreEqual(YourReflection::GetStaticMemberValue("YourMVC\UnitTest\Framework\MyTestClass","myStaticString"),"Hello World from a Static member");
+            $this->AssertAreEqual(YourReflection::GetStaticMemberValue("YourMVC\UnitTest\Framework\MyTestClass","myStaticInt"),3);
+            $this->AssertAreEqual(YourReflection::GetStaticMemberValue("YourMVC\UnitTest\Framework\MyTestClass","myStaticFloat"),2.78);
         }
 
         function GetDoesNotHaveStaticVariablesTest(){
             $iShouldFail = false;
             try{
-                $this->AssertFalse(MyReflection::GetStaticMemberValue("MyMVC\UnitTest\Framework\MyTestClass","myBadVariable"));
+                $this->AssertFalse(YourReflection::GetStaticMemberValue("YourMVC\UnitTest\Framework\MyTestClass","myBadVariable"));
                 $iShouldFail = true;
             }
             catch(\Exception $ex){
@@ -141,12 +141,12 @@ namespace MyMVC\UnitTest\Framework {
     }
 
     class MyTestClass {
-        
+
         // Variables
         var $myString = "Hello World";
         var $myInt = 1;
         var $myFloat = 3.14;
-        
+
         //Static Variables
         static $myStaticString = "Hello World from a Static member";
         static $myStaticInt = 3;
