@@ -92,6 +92,9 @@ namespace YourMVC {
             if($method->isStatic() || $method->isPrivate()){
                 return false;
             }
+            if ($method->getNumberOfRequiredParameters() > count($parameters) || $method->getNumberOfParameters() < count($parameters)) {
+            	return false;
+            }
             $retValue = null;
             if(is_null($parameters)){
                 $retValue = $method->invoke($object);
@@ -158,8 +161,9 @@ namespace YourMVC {
             catch(\Exception $ex){
                 return null;
             }
-            if(!is_null($args))
+            if(!is_null($args)) {
                 return $instance->newInstance($args);
+            }
             return $instance->newInstance();
         }
     }

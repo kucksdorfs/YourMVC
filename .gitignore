@@ -1,6 +1,6 @@
 #Eclipse generated files
 #################################################
-/.buildpath
-/.project
 /.settings/
 /.settings/.jsdtscope
+#Logging files
+/Tmp/*

@@ -1,30 +1,12 @@
 <?php
-include 'Models/Reflection.php';
-use YourMVC\Reflection;
+include_once "Libraries/Config/LoggingConfig.php";
+include_once "Libraries/Logging.php";
+//use YourMVC;
+use YourMVC\Console;
+use YourMVC\Configuration\LoggingConfiguration;
+use YourMVC\Logging;
 
-class HelloWorld {
-	public function sayHelloTo($name) {
-		echo "Hello $name";
-	}
-
-	private function reflectNotGoingToFindMe() {
-		echo "Hello World!";
-	}
-
-	public static function StaticHelloWorld() {
-		echo "Hello World!";
-	}
-}
-if(defined('STDIN') )
-	echo("Running from CLI");
-else
-	echo("Not Running from CLI");
-echo '<br/>';
-
-
-echo YourMVC\YourReflection::HasStaticMethod(new HelloWorld(), "StaticHelloWorld") == true ? "true" : "false";
-echo '</br>';
-echo YourMVC\YourReflection::HasInstanceMethod ( new HelloWorld (), "sayHelloTo" ) == true ? "true" : "false";
-echo '</br>';
-echo YourMVC\YourReflection::HasInstanceMethod ( new HelloWorld (), "reflectNotGoingToFindMe" ) == true ? "true" : "false";
-
+Console::LoadLogging(LoggingConfiguration::CLIDefault());
+Console::WriteInformation("Hello world!");
+Console::WriteError("There was an error.");
+Console::WriteWarning("Warning");

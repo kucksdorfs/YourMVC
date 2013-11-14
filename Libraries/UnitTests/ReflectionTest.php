@@ -44,7 +44,7 @@ namespace YourMVC\UnitTest\Framework {
             $myClass = YourReflection::CreateNewInstance("YourMVC\UnitTest\Framework\MyTestClass");
             $myRetValue = null;
             $completed = YourReflection::InvokeInstanceMethod($myClass,"CalculateSum",null,$myRetValue);
-            $this->AssertTrue($completed);
+            $this->AssertFalse($completed);
         }
 
         function CallVoidMethodTest(){

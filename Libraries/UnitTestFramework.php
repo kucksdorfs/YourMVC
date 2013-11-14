@@ -186,6 +186,8 @@ namespace YourMVC\UnitTest\Framework;
         }
     }
 }
-$unitTestPath = getcwd() . DIRECTORY_SEPARATOR . "UnitTests";
-$args = array("unitTestPath"=>$unitTestPath,"TestsEndWith"=>"Test");
-\YourMVC\UnitTest\Framework\UnitTest::Main($args);
+// The configuration for the Unit Tests
+include dirname($_SERVER['PHP_SELF']) . DIRECTORY_SEPARATOR . "Config" . DIRECTORY_SEPARATOR . "Setup.php";
+include_once 'Config/UnitTestConfig.php';
+use YourMVC\Configuration\UnitTestConfiguration;
+\YourMVC\UnitTest\Framework\UnitTest::Main(UnitTestConfiguration::GetUnitTestArgs());
