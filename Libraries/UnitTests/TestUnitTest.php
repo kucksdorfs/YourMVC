@@ -1,7 +1,7 @@
 <?php
 namespace MyMVC\UnitTest\Framework;
 {
-    require_once 'Libraries/UnitTestFramework.php';
+    require_once 'UnitTestFramework.php';
 
     class UnitTestsTest extends \YourMVC\UnitTest\Framework\UnitTest {
 
