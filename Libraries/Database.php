@@ -29,6 +29,7 @@ namespace YourMVC\Database{
     // Abstract Classes
     abstract class TableMeta implements iTableMeta{
         protected $link, $tableName;
+        
         public function __construct($link, $tableName){
             $this->link = $link;
             $this->tableName = $tableName;
@@ -225,7 +226,7 @@ namespace YourMVC\Database\MySQL{
             $this->password = $params ['Password'];
             $this->database = $params ['Database'];
             $this->port = isset($params ['Port']) ? intval($params ['Port'], 10) : 3306;
-            $this->socket = isset($params ['Socket']) ? $params : null;
+            $this->socket = isset($params ['Socket']) ? $params['Socket'] : null;
             $link = $this->Connect();
             if (!$link->ping())
                 throw new \Exception("Unable to estabilsh a connection to the database");
@@ -254,7 +255,18 @@ namespace YourMVC\Database\MySQL{
             return $results;
         }
         protected function Connect(){
-            $link = mysqli_connect($this->host, $this->user, $this->password, $this->database, $this->port, $this->socket);
+        	try {
+	            $link = \mysqli_connect(
+	            		$this->host,
+	            		$this->user,
+	            		$this->password,
+	            		$this->database,
+	            		$this->port,
+	            		$this->socket);
+        	}
+        	catch (Exception $exc) {
+        		$i = 0;
+        	}
             if (!$link->ping())
                 throw new \Exception("Unable to estabilsh a connection to the database");
             return $link;

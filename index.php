@@ -12,9 +12,13 @@ use YourMVC\Database;
 use YourMVC\Database\MySQL;
 
 Console::LoadLogging(LoggingConfiguration::CLIDefault());
-$defaultDatabase = DatabaseConfiguration::DatabaseDefault();
-$database = null;
-if ($defaultDatabase ["ClassName"] == 'YourMVC\\Database\\MySQL') {
+
+Console::WriteError("There was an error.");
+Console::WriteInformation("Some Information.");
+Console::WriteWarning("WARNING!");
+//$defaultDatabase = DatabaseConfiguration::DatabaseDefault();
+//$database = null;
+/*if ($defaultDatabase ["ClassName"] == 'YourMVC\\Database\\MySQL\\MySQL') {
     $database = new YourMVC\Database\MySQL\MySQL($defaultDatabase);
 } else {
     throw new Exception("Could not load the database.\n" . var_dump($defaultDatabase));
@@ -69,4 +73,4 @@ $database->ExecuteNonQuery("Delete from YourGroups where GroupName = 'TestInsert
 
 $statement = "select * from YourUsers;";
 $YourUsersRdr = $database->ExecuteReader($statement);
-$YourUsersQry = $database->ExecuteQuery($statement);
+$YourUsersQry = $database->ExecuteQuery($statement);*/
