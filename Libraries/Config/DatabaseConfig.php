@@ -1,15 +1,19 @@
 <?php
-namespace YourMVC\Configuration {
+namespace YourMVC\Configuration
+{
 
-    use YourMVC\YourMySQL;
-	class DatabaseConfiguration {
-        public static function DatabaseDefault() {
+    class DatabaseConfiguration
+    {
+
+        public static function DatabaseDefault()
+        {
             $config = array(
                 'ClassName' => 'YourMVC\\Database\\MySQL\\MySQL',
                 'HostName' => 'localhost',
                 'Database' => 'mydb',
                 'User' => 'mydb',
-                'Password' => 'password');
+                'Password' => 'password'
+            );
             return $config;
         }
     }

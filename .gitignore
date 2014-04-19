@@ -3,4 +3,4 @@
 /.settings/
 /.settings/.jsdtscope
 #Logging files
-/Tmp/*
+/Log/*

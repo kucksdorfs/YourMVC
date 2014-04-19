@@ -1,41 +1,51 @@
 <?php
+namespace YourMVC\Libraries\Config
+{
 
-namespace YourMVC\Configuration {
+    class LoggingConfig
+    {
 
-	class LoggingConfiguration {
-		public static function CLIDefault() {
-			/*$cliDefault = array (
-					"ClassName" => "YourMVC\\ConsoleLogging",
-					"SubLogging" => array (
-							"ClassName" => "YourMVC\\FileSystemLogging",
-							"Location" => "Tmp" . DIRECTORY_SEPARATOR . "CLI",
-							"SubLogging" => null
-					)
-			);*/
-			$cliDefault = array(
-				'ClassName' => 'YourMVC\\DatabaseLogging',
-				'Database' => array(
-						'ClassName' => 'YourMVC\\Database\\MySQL\\MySQL',
-		                'HostName' => 'localhost',
-		                'Database' => 'mydb',
-		                'User' => 'mydbLogging',
-		                'Password' => 'password'						
-				),
-				'Table' => 'Logging',
-				"SubLogging" => array (
-							"ClassName" => "YourMVC\\FileSystemLogging",
-							"Location" => "Tmp" . DIRECTORY_SEPARATOR . "CLI",
-							"SubLogging" => null
-					)
-			);
-			return $cliDefault;
-		}
-		public static function WebDefault() {
-			$webDefault = array (
-					"ClassName" => "FileSystem",
-					"Location" => "Tmp" . DIRECTORY_SEPARATOR . "Web"
-			);
-			return $webDefault;
-		}
-	}
+        public static function CLIDefault()
+        {
+            $cliDefault = array(
+                "ClassName" => "YourMVC\Libraries\Logging\ConsoleLogging",
+                "SubLogging" => array(
+                    "ClassName" => "YourMVC\Libraries\Logging\FileSystemLogging",
+                    "Location" => "Log" . DIRECTORY_SEPARATOR . "Web",
+                    "SubLogging" => array(
+                        'ClassName' => 'YourMVC\Libraries\Logging\DatabaseLogging',
+                        'Table' => 'Logging',
+                        'Database' => array(
+                            'ClassName' => 'YourMVC\Libraries\Database\MySQL\MySQL',
+                            'HostName' => 'localhost',
+                            'Database' => 'Logging',
+                            'User' => 'Logging',
+                            'Password' => 'logging'
+                        )
+                    )
+                )
+            );
+            return $cliDefault;
+        }
+
+        public static function WebDefault()
+        {
+            $webDefault = array(
+                "ClassName" => "YourMVC\Libraries\Logging\FileSystemLogging",
+                "Location" => "Log" . DIRECTORY_SEPARATOR . "Web",
+                "SubLogging" => array(
+                    'ClassName' => 'YourMVC\Libraries\Logging\DatabaseLogging',
+                    'Table' => 'Logging',
+                    'Database' => array(
+                        'ClassName' => 'YourMVC\Libraries\Database\MySQL\MySQL',
+                        'HostName' => 'localhost',
+                        'Database' => 'Logging',
+                        'User' => 'Logging',
+                        'Password' => 'logging'
+                    )
+                )
+            );
+            return $webDefault;
+        }
+    }
 }
