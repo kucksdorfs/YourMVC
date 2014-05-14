@@ -22,6 +22,11 @@ function __autoload($className)
     require_once $includePaths[$i] . $myRequirePath;
 }
 
-use YourMVC\Libraries\YourReflection;
-use YourMVC\Libraries\Logging\Console;
 YourMVC\Libraries\Logging\Console::LoadLogging(YourMVC\Libraries\Config\LoggingConfig::WebDefault());
+
+$routingInfo = null;
+if (isset($_SERVER['PATH_INFO'])) {
+    $method = strtoupper($_SERVER['REQUEST_METHOD']);
+    $namedParameters = $method == "GET" ? $_GET : $_POST;
+    $routingInfo = YourMVC\Libraries\Routing::GetRoutingInfo(strtoupper($_SERVER['PATH_INFO']), $method, $namedParameters);
+}
