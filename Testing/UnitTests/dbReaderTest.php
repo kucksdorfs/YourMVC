@@ -2,7 +2,6 @@
 namespace YourMVC\UnitTest\Framework
 {
 
-    //require_once 'Libraries/Database/DatabaseReader.php';
     use YourMVC\Libraries\Database\DatabaseReader;
 
     class DatabaseReaderTest extends \YourMVC\Testing\UnitTestFramework

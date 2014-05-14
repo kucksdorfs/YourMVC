@@ -1,5 +1,5 @@
 <?php
-namespace MyMVC\UnitTest\Framework
+namespace YourMVC\UnitTest\Framework
 {
 
     class UnitTestsTest extends \YourMVC\Testing\UnitTestFramework
