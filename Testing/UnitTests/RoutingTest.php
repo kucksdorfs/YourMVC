@@ -13,12 +13,12 @@ namespace YourMVC\UnitTest\Framework
             $method = "GET";
             $params = null;
             $routeInfo = Routing::GetRoutingInfo($route, $method, $params);
-            
-            $this->AssertAreEqual($routeInfo["Controller"], "HOME");
-            $this->AssertAreEqual($routeInfo["Action"], "STEPHEN");
-            $this->AssertAreEqual($routeInfo["Method"], "GET");
-            $this->AssertAreEqual(count($routeInfo["URLParams"]), 0);
-            $this->AssertAreEqual(count($routeInfo["NamedParams"]), 0);
+
+            $this->AssertAreEqual($routeInfo["Controller"], "Home", "controller");
+            $this->AssertAreEqual($routeInfo["Action"], "Stephen", "action");
+            $this->AssertAreEqual($routeInfo["Method"], "GET", "method");
+            $this->AssertAreEqual(count($routeInfo["URLParams"]), 0, "urlparam");
+            $this->AssertAreEqual(count($routeInfo["NamedParams"]), 0, "namedparam");
         }
 
         function ControllerActionPostTest()
@@ -27,9 +27,9 @@ namespace YourMVC\UnitTest\Framework
             $method = "POST";
             $params = null;
             $routeInfo = Routing::GetRoutingInfo($route, $method, $params);
-            
-            $this->AssertAreEqual($routeInfo["Controller"], "MYCONTROLLER");
-            $this->AssertAreEqual($routeInfo["Action"], "MYACTION");
+
+            $this->AssertAreEqual($routeInfo["Controller"], "Mycontroller");
+            $this->AssertAreEqual($routeInfo["Action"], "Myaction");
             $this->AssertAreEqual($routeInfo["Method"], "POST");
             $this->AssertAreEqual(count($routeInfo["URLParams"]), 0);
             $this->AssertAreEqual(count($routeInfo["NamedParams"]), 0);
@@ -38,9 +38,9 @@ namespace YourMVC\UnitTest\Framework
         function NoControllerNoMethodTest()
         {
             $routeInfo = Routing::GetRoutingInfo();
-            
-            $this->AssertAreEqual($routeInfo["Controller"], "HOME");
-            $this->AssertAreEqual($routeInfo["Action"], "INDEX");
+
+            $this->AssertAreEqual($routeInfo["Controller"], "Home");
+            $this->AssertAreEqual($routeInfo["Action"], "Index");
             $this->AssertAreEqual($routeInfo["Method"], "GET");
             $this->AssertAreEqual(count($routeInfo["URLParams"]), 0);
             $this->AssertAreEqual(count($routeInfo["NamedParams"]), 0);
@@ -50,9 +50,9 @@ namespace YourMVC\UnitTest\Framework
         {
             $route = "/mycontroller/";
             $routeInfo = Routing::GetRoutingInfo($route);
-            
-            $this->AssertAreEqual($routeInfo["Controller"], "MYCONTROLLER");
-            $this->AssertAreEqual($routeInfo["Action"], "INDEX");
+
+            $this->AssertAreEqual($routeInfo["Controller"], "Mycontroller");
+            $this->AssertAreEqual($routeInfo["Action"], "Index");
             $this->AssertAreEqual($routeInfo["Method"], "GET");
             $this->AssertAreEqual(count($routeInfo["URLParams"]), 0);
             $this->AssertAreEqual(count($routeInfo["NamedParams"]), 0);
@@ -62,22 +62,22 @@ namespace YourMVC\UnitTest\Framework
         {
             $route = "/mycontroller/myaction/Param1";
             $routeInfo = Routing::GetRoutingInfo($route);
-            
-            $this->AssertAreEqual($routeInfo["Controller"], "MYCONTROLLER");
-            $this->AssertAreEqual($routeInfo["Action"], "MYACTION");
+
+            $this->AssertAreEqual($routeInfo["Controller"], "Mycontroller");
+            $this->AssertAreEqual($routeInfo["Action"], "Myaction");
             $this->AssertAreEqual($routeInfo["Method"], "GET");
             $this->AssertAreEqual(count($routeInfo["URLParams"]), 1);
             $this->AssertAreEqual($routeInfo["URLParams"][0], "Param1");
             $this->AssertAreEqual(count($routeInfo["NamedParams"]), 0);
         }
-        
+
         function ControllerActionMulitpleURLParamTest()
         {
             $route = "/mycontroller/myaction/Param1/Param2/3/4/";
             $routeInfo = Routing::GetRoutingInfo($route);
-        
-            $this->AssertAreEqual($routeInfo["Controller"], "MYCONTROLLER");
-            $this->AssertAreEqual($routeInfo["Action"], "MYACTION");
+
+            $this->AssertAreEqual($routeInfo["Controller"], "Mycontroller");
+            $this->AssertAreEqual($routeInfo["Action"], "Myaction");
             $this->AssertAreEqual($routeInfo["Method"], "GET");
             $this->AssertAreEqual(count($routeInfo["URLParams"]), 4);
             $this->AssertAreEqual($routeInfo["URLParams"][0], "Param1");
@@ -86,54 +86,54 @@ namespace YourMVC\UnitTest\Framework
             $this->AssertAreEqual($routeInfo["URLParams"][3], 4);
             $this->AssertAreEqual(count($routeInfo["NamedParams"]), 0);
         }
-        
+
         function ControllerActionWithPoundSymbolTest()
         {
             $route = "/mycontroller/myaction/Param1/#Param2/3/4/";
             $routeInfo = Routing::GetRoutingInfo($route);
-        
-            $this->AssertAreEqual($routeInfo["Controller"], "MYCONTROLLER");
-            $this->AssertAreEqual($routeInfo["Action"], "MYACTION");
+
+            $this->AssertAreEqual($routeInfo["Controller"], "Mycontroller");
+            $this->AssertAreEqual($routeInfo["Action"], "Myaction");
             $this->AssertAreEqual($routeInfo["Method"], "GET");
             $this->AssertAreEqual(count($routeInfo["URLParams"]), 1);
             $this->AssertAreEqual($routeInfo["URLParams"][0], "Param1");
             $this->AssertAreEqual(count($routeInfo["NamedParams"]), 0);
         }
-        
+
         function ControllerActionWithQuestionSymbolTest()
         {
             $route = "/mycontroller/myaction/Param1/?Param2=10&a=3";
             $routeInfo = Routing::GetRoutingInfo($route);
-        
-            $this->AssertAreEqual($routeInfo["Controller"], "MYCONTROLLER");
-            $this->AssertAreEqual($routeInfo["Action"], "MYACTION");
+
+            $this->AssertAreEqual($routeInfo["Controller"], "Mycontroller");
+            $this->AssertAreEqual($routeInfo["Action"], "Myaction");
             $this->AssertAreEqual($routeInfo["Method"], "GET");
             $this->AssertAreEqual(count($routeInfo["URLParams"]), 1);
             $this->AssertAreEqual($routeInfo["URLParams"][0], "Param1");
             $this->AssertAreEqual(count($routeInfo["NamedParams"]), 0);
         }
-        
-        
+
+
         function ControllerActionWithNamedParametersTest()
         {
             $route = "/mycontroller/myaction/Param1/?Param2=10&a=3";
             $namedParams = array(
             	"Param2" => 10,
                 "a" => 3
-                
+
             );
             $routeInfo = Routing::GetRoutingInfo($route, "get", $namedParams);
-        
-            $this->AssertAreEqual($routeInfo["Controller"], "MYCONTROLLER");
-            $this->AssertAreEqual($routeInfo["Action"], "MYACTION");
+
+            $this->AssertAreEqual($routeInfo["Controller"], "Mycontroller");
+            $this->AssertAreEqual($routeInfo["Action"], "Myaction");
             $this->AssertAreEqual($routeInfo["Method"], "GET");
             $this->AssertAreEqual(count($routeInfo["URLParams"]), 1);
             $this->AssertAreEqual($routeInfo["URLParams"][0], "Param1");
             $this->AssertAreEqual(count($routeInfo["NamedParams"]), 2);
             $this->AssertAreEqual($routeInfo["NamedParams"]["Param2"], 10);
-            $this->AssertAreEqual($routeInfo["NamedParams"]["a"], 10);
+            $this->AssertAreEqual($routeInfo["NamedParams"]["a"], 3);
         }
-        
+
         function ControllerAndActionWithPoundAndNamedParamsTest()
         {
             function ControllerActionWithNamedParametersTest()
@@ -142,12 +142,12 @@ namespace YourMVC\UnitTest\Framework
                 $namedParams = array(
                     "Param2" => 10,
                     "a" => 3
-            
+
                 );
                 $routeInfo = Routing::GetRoutingInfo($route, "get", $namedParams);
-            
-                $this->AssertAreEqual($routeInfo["Controller"], "MYCONTROLLER");
-                $this->AssertAreEqual($routeInfo["Action"], "MYACTION");
+
+                $this->AssertAreEqual($routeInfo["Controller"], "Mycontroller");
+                $this->AssertAreEqual($routeInfo["Action"], "Myaction");
                 $this->AssertAreEqual($routeInfo["Method"], "GET");
                 $this->AssertAreEqual(count($routeInfo["URLParams"]), 1);
                 $this->AssertAreEqual($routeInfo["URLParams"][0], "Param1");

@@ -1,6 +1,7 @@
 <?php
 //set_include_path(get_include_path() . ":..");
 chdir("..");
+header("Content-type: text/plain");
 
 require_once 'Libraries' . DIRECTORY_SEPARATOR . 'Core.php';
 

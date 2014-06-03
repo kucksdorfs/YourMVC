@@ -6,17 +6,17 @@ namespace YourMVC\Libraries
     {
 
         private static $defaultValues =  array(
-            "Controller" => "HOME",
-            "Action" => "INDEX"
+            "Controller" => "Home",
+            "Action" => "Index"
         );
 
         private static $hasController = false, $hasAction = false;
 
         private static function GetController($explodedURL)
         {
-            if (count($explodedURL) > 0) {
+            if (count($explodedURL) > 0 && strlen($explodedURL[0]) > 0) {
                 self::$hasController = true;
-                return $explodedURL[0];
+                return ucfirst($explodedURL[0]);
             }
             self::$hasController = false;
             return self::$defaultValues["Controller"];
@@ -24,10 +24,10 @@ namespace YourMVC\Libraries
 
         private static function GetAction($explodedURL)
         {
-        	if (self::$hasController && count($explodedURL) > 1)
+        	if (self::$hasController && count($explodedURL) > 1 && strlen($explodedURL[1]) > 0)
         	{
         	    self::$hasAction = true;
-        	    return $explodedURL[1];
+        	    return ucfirst($explodedURL[1]);
         	}
     	   self::$hasAction = false;
     	   return self::$defaultValues["Action"];
@@ -50,23 +50,22 @@ namespace YourMVC\Libraries
                     {
                         $i = count($explodedURL);
                     }
-                    
+
                     ++$i;
-                }     
+                }
                 return $retAry;
         	}
-        	
+
             return array();
         }
 
-        public static function GetRoutingInfo($url = "/HOME/INDEX", $method = "GET", $namedParameters = null)
+        public static function GetRoutingInfo($url = "/Home/Index", $method = "GET", $namedParameters = null)
         {
-            $explodedURL = explode("/", strtoupper(trim($url, '/')));
-            
+            $explodedURL = explode("/", trim($url, '/'));
+
             $controller = self::GetController($explodedURL);
             $action = self::GetAction($explodedURL);
-            // re-do exploding the URL so the parameter doesn't get capitilized unnecessarily. 
-            $urlParams = self::GetURLParameters(explode("/", trim($url, '/')));
+            $urlParams = self::GetURLParameters($explodedURL);
             $retNamedParameters = array();
             if ($namedParameters != null)
             {
@@ -75,10 +74,10 @@ namespace YourMVC\Libraries
                     $retNamedParameters[$key] = $value;
                 }
             }
-            
+
             return array(
-            	"Controller" => strtoupper($controller),
-                "Action" => strtoupper($action),
+            	"Controller" => ucfirst($controller),
+                "Action" => ucfirst($action),
                 "Method" => strtoupper($method),
                 "URLParams" => $urlParams,
                 "NamedParams" => $retNamedParameters
