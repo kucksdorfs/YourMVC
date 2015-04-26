@@ -19,6 +19,7 @@ namespace YourMVC\Libraries\Logging
         function WriteInformation($message)
         {
             $file = fopen($this->location . "Information.dat", "a+", $this->useIncludePath);
+            echo get_current_user();
             if ($file == false) {
                 $this->subLogging->WriteInformation($message);
                 return;

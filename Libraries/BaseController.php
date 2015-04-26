@@ -2,7 +2,7 @@
 namespace YourMVC\Libraries
 {
 
-    class BaseController
+    class BaseController extends \YourMVC\Libraries\Interfaces\Base
     {
 
         protected $activeView = null;
@@ -13,7 +13,7 @@ namespace YourMVC\Libraries
         {
             $this->activeView = $view;
             $this->myModel = $model;
-
+            
             return array(
                 "View" => $this->activeView,
                 "Controller" => get_class($this),
@@ -24,12 +24,14 @@ namespace YourMVC\Libraries
         function __construct()
         {}
 
-        public function Error404() {
+        public function Error404()
+        {
             header('HTTP/1.0 404 Not Found');
             echo 'The controller/action pair could not be found.';
         }
 
-        public function Error500() {
+        public function Error500()
+        {
             header('HTTP/1.1 500 Internal Server Error');
             echo 'There was an internal error.';
         }

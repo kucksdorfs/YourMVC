@@ -32,7 +32,7 @@ namespace YourMVC\Libraries\Config
         {
             $webDefault = array(
                 "ClassName" => "YourMVC\Libraries\Logging\FileSystemLogging",
-                "Location" => "Log" . DIRECTORY_SEPARATOR . "Web",
+                "Location" => "Log" . DIRECTORY_SEPARATOR . "Web"/*,
                 "SubLogging" => array(
                     'ClassName' => 'YourMVC\Libraries\Logging\DatabaseLogging',
                     'Table' => 'Logging',
@@ -43,7 +43,7 @@ namespace YourMVC\Libraries\Config
                         'User' => 'Logging',
                         'Password' => 'logging'
                     )
-                )
+                )*/
             );
             return $webDefault;
         }

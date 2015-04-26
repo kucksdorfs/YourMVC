@@ -16,8 +16,10 @@ namespace YourMVC\Libraries\Database\MySQL
     class MySQL implements iDatabase
     {
 
-        private $host, $user, $password, $database; // Required
-        private $port, $socket; // Optional
+        private $host, $user, $password, $database;
+        // Required
+        private $port, $socket;
+        // Optional
         public static function CreateNewDatabase($host, $user, $password, $database, $port = 3306, $socket = null)
         {
             $params = array();
@@ -30,6 +32,11 @@ namespace YourMVC\Libraries\Database\MySQL
             
             $database = new MySQL($params);
             return $database;
+        }
+
+        static function NewDatabase($parameters)
+        {
+            return new MySQL($parameters);
         }
 
         public static function CreateNewDatabaseWithAssocArray($params)
@@ -93,7 +100,7 @@ namespace YourMVC\Libraries\Database\MySQL
         protected function Connect()
         {
             try {
-                $link =\mysqli_connect($this->host, $this->user, $this->password, $this->database, $this->port, $this->socket);
+                $link = \mysqli_connect($this->host, $this->user, $this->password, $this->database, $this->port, $this->socket);
             } catch (Exception $exc) {
                 $i = 0;
                 echo $exc->getMessage();

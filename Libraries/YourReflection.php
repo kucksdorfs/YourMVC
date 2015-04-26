@@ -124,7 +124,7 @@ namespace YourMVC\Libraries
             if (is_null($parameters)) {
                 $retValue = $method->invoke(null);
             } else {
-                $retValue = $method->invokeArgs(null, $parameters);
+                $retValue = $method->invoke(null, $parameters);
             }
             return true;
         }

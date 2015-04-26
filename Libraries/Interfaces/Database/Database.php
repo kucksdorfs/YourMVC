@@ -1,6 +1,7 @@
 <?php
 namespace YourMVC\Libraries\Interfaces\Database
 {
+
     require_once 'TableMeta.php';
     require_once 'ColumnMeta.php';
 
@@ -11,6 +12,15 @@ namespace YourMVC\Libraries\Interfaces\Database
      */
     interface iDatabase
     {
+
+        /**
+         * This function is to be used to create a new iDatabase object.
+         *
+         * @param
+         *            - Associate Array @parameters - The parameters to be passed into the object.
+         * @return - An Object that returns an object that implements the iDatabase interface.
+         */
+        static function NewDatabase($parameters);
 
         /**
          * This function is to be used to execute a select statement and to get
